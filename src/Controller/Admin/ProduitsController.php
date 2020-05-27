@@ -15,6 +15,14 @@ class ProduitsController extends AbstractController
      */
     public function index()
     {
+        /*
+        $user = $this->getUser();
+        dump($user);
+        $hasAccess = $this->isGranted('ROLE_TOTO');
+        dump($hasAccess);
+        $this->denyAccessUnlessGranted('ROLE_TITI');
+        */
+
         $produitsRepository = $this->getDoctrine()->getRepository(Produits::class);
         $produits = $produitsRepository->findAll();
         return $this->render('admin/produits/index.html.twig',[

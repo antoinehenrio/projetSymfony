@@ -21,6 +21,19 @@
                     <a class="dropdown-item" href="{{ path('produits') }}">Tous les produits</a>
                 </div>
             </li>
+            <li>
+                {% if is_granted("ROLE_TOTO") %}
+                    Vous avez le role TOTO
+                {% else %}
+                    Veuillez vous connecter
+                {% endif %}
+
+                {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                    - Déconnexion -
+                {% else %}
+                    - Connexion Form -
+                {% endif %}
+            </li>
 
         </ul>
         <form class="form-inline my-2 my-lg-0">

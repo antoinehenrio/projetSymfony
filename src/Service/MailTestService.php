@@ -4,7 +4,7 @@ namespace App\Service;
 use App\Entity\Produits;
 use Twig\Environment;
 
-class MailTestServices{
+class MailTestService{
     private $mailer;
     private $render;
 
