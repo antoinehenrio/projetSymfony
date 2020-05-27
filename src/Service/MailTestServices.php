@@ -1,5 +1,5 @@
 <?php
-namespace src\Service;
+namespace App\Service;
 
 use App\Entity\Produits;
 use Twig\Environment;
