@@ -26,8 +26,20 @@ class ProduitsController extends AbstractController
     /**
      * @Route  ("/admin/produit/add", name="admin.produit.add")
      */
-    public function add(){
-        return $this->render('admin/produits/add.html.twig');
+    public function add(Request $request){
+        $produit = new Produits();
+        $form = $this->createForm(ProduitEditType::class,$produit);
+        $form->handleRequest($request);
+
+
+        if($form->isSubmitted() && $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+        }
+
+        return $this->render('admin/produits/add.html.twig',[
+            'form' => $form->createView()
+        ]);
     }
 
     /**

@@ -2,62 +2,7 @@
 {% block title 'Editer le produit' %}
 {% block body %}
     <div class="container">
-        {{ form_start(form ,{'method' : 'post','name' : 'produitEdit'}) }}
-        {{ form_errors(form) }}
-        <div class="row">
-            <div class="col-md-4">
-                {{ form_label(form.Titre) }}
-                {{ form_widget(form.Titre) }}
-                {{ form_errors(form.Titre) }}
-            </div>
-            <div class="col-md-4">
-                {{ form_label(form.Description) }}
-                {{ form_widget(form.Description) }}
-                {{ form_errors(form.Description) }}
-            </div>
-            <div class="col-md-4">
-                {{ form_label(form.PriceTTC) }}
-                {{ form_widget(form.PriceTTC) }}
-                {{ form_errors(form.PriceTTC) }}
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                {{ form_label(form.Poids) }}
-                {{ form_widget(form.Poids) }}
-                {{ form_errors(form.Poids) }}
-            </div>
-            <div class="col-md-4">
-                {{ form_label(form.Couleur) }}
-                {{ form_widget(form.Couleur) }}
-                {{ form_errors(form.Couleur) }}
-            </div>
-            <div class="col-md-4">
-                {{ form_label(form.StockQte) }}
-                {{ form_widget(form.StockQte) }}
-                {{ form_errors(form.StockQte) }}
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                {{ form_label(form.Actif) }}
-                {{ form_widget(form.Actif) }}
-                {{ form_errors(form.Actif) }}
-            </div>
-            <div class="col-md-8">
-                {{ form_label(form.DateCreated) }}
-                {{ form_widget(form.DateCreated) }}
-                {{ form_errors(form.DateCreated) }}
-            </div>
-        </div>
-
-        {{ form_rest(form) }}
-        <button class="btn btn-primary">Valider</button>
-        {{ form_end(form) }}
-
-
+        {% include 'admin/produits/_form.html.twig' with {'formToShow' : 'edit'} %}
     </div>
 
 {% endblock %}
