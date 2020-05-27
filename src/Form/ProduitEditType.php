@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Marques;
 use App\Entity\Produits;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,6 +27,10 @@ class ProduitEditType extends AbstractType
             ->add('DateCreated')
             ->add('StockQte')
             ->add('Actif')
+            ->add('Marque', EntityType::class,[
+                'choice_label' => 'Nom',
+                'class' => Marques::class
+            ])
         ;
     }
 

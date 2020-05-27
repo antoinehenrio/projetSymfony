@@ -68,6 +68,11 @@ class Produits
      */
     private $Actif;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Marques::class, inversedBy="Produits")
+     */
+    private $Marque;
+
     public function __construct()
     {
         $this->Actif = false;
@@ -191,6 +196,18 @@ class Produits
     public function setSlug(string $slug): Produits
     {
         $this->slug = $slug;
+        return $this;
+    }
+
+    public function getMarque(): ?Marques
+    {
+        return $this->Marque;
+    }
+
+    public function setMarque(?Marques $Marque): self
+    {
+        $this->Marque = $Marque;
+
         return $this;
     }
 }
