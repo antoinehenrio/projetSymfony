@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Produits;
+use App\Form\ProduitEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,8 +33,12 @@ class ProduitsController extends AbstractController
     /**
      * @Route("/admin/produits/{id}", name="admin.produit.edit")
      */
-    public function edit(){
-        return $this->render('admin/produits/edit.html.twig');
+    public function edit(Produits $produits){
+        $form = $this->createForm(ProduitEditType::class,$produits);
+
+        return $this->render('admin/produits/edit.html.twig',[
+            'form' => $form->createView()
+        ]);
     }
 
 
