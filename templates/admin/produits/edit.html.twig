@@ -1,4 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block title 'Editer le produit' %}
 {% block body %}
+    <div class="container">
+        {{ form_start(form) }}
+        {{ form_rest(form) }}
+
+            <button class="btn btn-primary">Valider</button>
+
+        {{ form_end(form) }}
+
+    </div>
+
 {% endblock %}
