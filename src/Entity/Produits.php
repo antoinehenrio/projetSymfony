@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ProduitsRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass=ProduitsRepository::class)
  */
@@ -57,6 +59,7 @@ class Produits
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(min="3", max="100", notInRangeMessage="Attention il faut que ça soit entre {{ min }} et {{ max }} et vous avez écrit {{ value }}")
      */
     private $StockQte;
 
