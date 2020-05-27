@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProduitsController!{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h2> Nos produits en stock</h2>
+        <div class="row flex">
+            {% for produit in produits %}
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{{ path('produit_detail',{'slug': produit.slug}) }}">{{ produit.Titre }}</a>
+                            </h5>
+                            <p class="card-text">{{ produit.Description }}</p>
+                            <p class="card-text">{{ produit.Poids|number_format(1, ',', '.') }} Kgs</p>
+                            <div class="text-primary" style="font-weight: bold;font-size: 2rem">{{ produit.PriceTTC | number_format(0,'',' ')}} € TTC</div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
