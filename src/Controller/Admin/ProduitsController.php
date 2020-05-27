@@ -34,7 +34,9 @@ class ProduitsController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             $em = $this->getDoctrine()->getManager();
+            $em->persist($produit);
             $em->flush();
+            return $this->redirectToRoute('admin_produits');
         }
 
         return $this->render('admin/produits/add.html.twig',[
