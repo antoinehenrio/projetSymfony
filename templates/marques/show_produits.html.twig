@@ -13,12 +13,13 @@
         <div class="row flex">
             {% set flag = true %}
             {% for produit in produits %}
+                {% dump(produit.slug) %}
                 {% if flag == true %}
                     <div class="col-3">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <a href="{{ path('produit_detail',{'id': produit.slug}) }}">{{ produit.Titre }}</a>
+                                    <a href="{{ path('produit_detail',{'slug': produit.slug}) }}">{{ produit.Titre }}</a>
                                 </h5>
                                 <p class="card-text">{{ produit.Description }}</p>
                                 <p class="card-text">{{ produit.Poids|number_format(1, ',', '.') }} Kgs</p>
