@@ -36,8 +36,12 @@
             </li>
 
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0" role="search" method="post" action="{{ path('search.produit') }}">
+            <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search" required>
+            <span class="validity"></span>
         </form>
+        {#{{ render(controller(
+            'App\\Controller\\Admin\\SearchController::searchBar'
+        )) }}#}
     </div>
 </nav>
