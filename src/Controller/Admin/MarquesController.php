@@ -28,7 +28,7 @@ class MarquesController extends AbstractController
     /**
      * @Route("/new", name="marques_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request,MarquesRepository $marquesRepository): Response
     {
         $marque = new Marques();
         $form = $this->createForm(MarquesType::class, $marque);
@@ -45,23 +45,38 @@ class MarquesController extends AbstractController
         return $this->render('marques/new.html.twig', [
             'marque' => $marque,
             'form' => $form->createView(),
+            'marques' => $marquesRepository->findAll()
         ]);
     }
 
     /**
      * @Route("/{id}", name="marques_show", methods={"GET"})
      */
-    public function show(Marques $marque): Response
+    public function show(Marques $marque,MarquesRepository $marquesRepository): Response
     {
         return $this->render('marques/show.html.twig', [
             'marque' => $marque,
+            'marques' => $marquesRepository->findAll()
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/show", name="marques_show", methods={"GET"})
+     */
+    public function showProduits(Marques $marque,MarquesRepository $marquesRepository): Response
+    {
+        $produits = $marque->getProduits();
+        return $this->render('marques/show.html.twig_produits', [
+            'marque' => $marque,
+            'produits' => $produits,
+            'marques' => $marquesRepository->findAll()
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="marques_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Marques $marque): Response
+    public function edit(Request $request, Marques $marque,MarquesRepository $marquesRepository): Response
     {
         $form = $this->createForm(MarquesType::class, $marque);
         $form->handleRequest($request);
@@ -75,13 +90,14 @@ class MarquesController extends AbstractController
         return $this->render('marques/edit.html.twig', [
             'marque' => $marque,
             'form' => $form->createView(),
+            'marques' => $marquesRepository->findAll()
         ]);
     }
 
     /**
      * @Route("/{id}", name="marques_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Marques $marque): Response
+    public function delete(Request $request, Marques $marque,MarquesRepository $marquesRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$marque->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();

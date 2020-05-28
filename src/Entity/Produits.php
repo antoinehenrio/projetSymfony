@@ -73,6 +73,11 @@ class Produits
      */
     private $Marque;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $marque_id;
+
     public function __construct()
     {
         $this->Actif = false;
@@ -207,6 +212,18 @@ class Produits
     public function setMarque(?Marques $Marque): self
     {
         $this->Marque = $Marque;
+
+        return $this;
+    }
+
+    public function getMarqueId(): ?int
+    {
+        return $this->marque_id;
+    }
+
+    public function setMarqueId(int $marque_id): self
+    {
+        $this->marque_id = $marque_id;
 
         return $this;
     }

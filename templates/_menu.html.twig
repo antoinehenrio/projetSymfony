@@ -15,8 +15,9 @@
                     Produits
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/produits/marque/Apple">Apple</a>
-                    <a class="dropdown-item" href="/produits/marque/Microsoft">Microsoft</a>
+                    {% for marque in marques %}
+                    <a class="dropdown-item" href="/produits/marque/{{ marque.nom }}">{{ marque.nom }}</a>
+                    {% endfor %}
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ path('produits') }}">Tous les produits</a>
                 </div>
