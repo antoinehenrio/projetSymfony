@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Marques;
 use App\Form\MarquesType;
 use App\Repository\MarquesRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -63,10 +64,11 @@ class MarquesController extends AbstractController
     /**
      * @Route("/{id}/show", name="marques_show_produits", methods={"GET"})
      */
-    public function showProduits(Marques $marque,MarquesRepository $marquesRepository): Response
+    public function showProduits(Request $request,PaginatorInterface $paginator,Marques $marque,MarquesRepository $marquesRepository): Response
     {
         $produits = $marque->getProduits();
-        return $this->render('marques/show.html.twig_produits', [
+        $produits = $paginator->paginate($produits,$request->query->getInt('page',1),20);
+        return $this->render('marques/show_produits.html.twig', [
             'marque' => $marque,
             'produits' => $produits,
             'marques' => $marquesRepository->findAll()
