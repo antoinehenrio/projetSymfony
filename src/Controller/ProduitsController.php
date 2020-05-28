@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
 use App\Entity\Produits;
 use Knp\Component\Pager\PaginatorInterface;
+use App\Form\ContactType;
+use App\Service\MailTestService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -53,11 +56,26 @@ class ProduitsController extends AbstractController
      * @param $slug
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function detail(Produits $produit){
+    public function detail(Produits $produit, Request $request, MailTestService $email){
+
+        $contact = new Contact();
+        $contact->setProduit($produit);
+        $form = $this->createForm(ContactType::class,$contact);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $email->sendProduit($produit);
+            $this->addFlash('success', 'Votre email a bien été envoyé');
+            return $this->redirectToRoute('produit_detail', [
+                'slug' => $produit->getSlug()
+            ]);
+        }
+
 
         return $this->render('produits/details.html.twig',[
             'produit' => $produit,
-            'current_menu' => 'produits'
+            'current_menu' => 'produits',
+            'form' => $form->createView()
         ]);
     }
 }

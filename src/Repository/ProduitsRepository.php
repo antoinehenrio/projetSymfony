@@ -56,7 +56,16 @@ class ProduitsRepository extends ServiceEntityRepository
             ->setParameter('actif', true)
             ->getQuery()
             ->getResult();
-
     }
 
+    public function searchLike($text)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.Titre LIKE :val')
+            ->orWhere('p.Description LIKE :val')
+            ->setParameter('val', '%'.$text.'%')
+            ->orderBy('p.Titre', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }
