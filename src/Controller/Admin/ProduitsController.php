@@ -28,7 +28,6 @@ class ProduitsController extends AbstractController
         return $this->render('admin/produits/index.html.twig',[
             'produits' => $produits
         ]);
-
     }
 
     /**
@@ -44,7 +43,6 @@ class ProduitsController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($produit);
             $em->flush();
-            return $this->redirectToRoute('admin_produits');
         }
 
         return $this->render('admin/produits/add.html.twig',[
@@ -69,12 +67,10 @@ class ProduitsController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/admin/produit/delete/{id}", name="admin.produit.delete", methods="DELETE")
      */
     public function delete(Produits $produit,Request $request){
         return $this->redirectToRoute('admin_produits');
     }
-
 }
