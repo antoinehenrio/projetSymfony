@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des produits!{% endblock %}
+
+{% block body %}
+    <style>
+        .pagination { align-content:center;margin: auto 0.5em;border: solid 1px #007bff;background-color: white !important;text-align: center; max-width: 800px; font: 20px/1.5 sans-serif; }
+        .numPage { padding-left:7px;align-content: center; vertical-align: middle; color: #007bff;}
+        .espace { margin-top: 5em; }
+    </style>
+    <div class="container">
+        <h2> Nos produits en stock</h2>
+        <div class="row flex">
+            {% set flag = true %}
+            {% for produit in produits %}
+                {% if flag == true %}
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{{ path('produit_detail',{'id': produit.slug}) }}">{{ produit.Titre }}</a>
+                                </h5>
+                                <p class="card-text">{{ produit.Description }}</p>
+                                <p class="card-text">{{ produit.Poids|number_format(1, ',', '.') }} Kgs</p>
+                                <div class="text-primary" style="font-weight: bold;font-size: 2rem">{{ produit.PriceTTC | number_format(0,'',' ')}} € TTC</div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% block footer %}
+        <div class="navigation row col-12 mt-5 mb-5 d-flex justify-content-center">
+            {{ knp_pagination_render(produits) }}
+        </div>
+    {% endblock %}
+{% endblock %}

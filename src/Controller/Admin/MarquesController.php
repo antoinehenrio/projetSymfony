@@ -61,7 +61,7 @@ class MarquesController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/show", name="marques_show", methods={"GET"})
+     * @Route("/{id}/show", name="marques_show_produits", methods={"GET"})
      */
     public function showProduits(Marques $marque,MarquesRepository $marquesRepository): Response
     {

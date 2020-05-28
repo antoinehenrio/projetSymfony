@@ -16,7 +16,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     {% for marque in marques %}
-                    <a class="dropdown-item" href="/produits/marque/{{ marque.nom }}">{{ marque.nom }}</a>
+                        <a class="dropdown-item" href="/admin/marques/{{ marque.id }}">{{ marque.nom }}</a>
                     {% endfor %}
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ path('produits') }}">Tous les produits</a>

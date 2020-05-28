@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/pepper-grinder/jquery-ui.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     {% block stylesheets %}{% endblock %}
-    {{ include('_menu.html.twig') }}
+    {{ render(controller('App\\Controller\\DefaultController::renderMenu'))}}
 </head>
 <body>
 {% block body %}{% endblock %}
