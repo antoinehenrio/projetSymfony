@@ -1,0 +1,10 @@
+<h1>Demande de contact {{ contact.produit.titre }}</h1>
+<p>
+    Une nouvelle personne souhaiterais obtenir plus d'information à propos du bien <a href="{{ url('produit_detail', {slug: contact.produit.slug}) }}">{{ contact.produit.titre }}</a>
+</p>
+
+<p>Prénom{{ contact.firstname }}</p>
+<p>Nom{{ contact.lastname }}</p>
+<p>Téléphone{{ contact.phone }}</p>
+<p>Email{{ contact.email }}</p>
+<p>Message{{ contact.message }}</p>
