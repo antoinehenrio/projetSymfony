@@ -4,8 +4,10 @@ namespace App\Controller\Admin;
 
 use App\Entity\Produits;
 use App\Form\ProduitEditType;
+use App\Repository\MarquesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProduitsController extends AbstractController
@@ -29,6 +31,7 @@ class ProduitsController extends AbstractController
             'produits' => $produits
         ]);
     }
+
 
     /**
      * @Route  ("/admin/produit/add", name="admin.produit.add")

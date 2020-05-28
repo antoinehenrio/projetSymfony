@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProduitsController!{% endblock %}
+{% block title %}Liste des produits!{% endblock %}
 
 {% block body %}
     <style>
@@ -14,18 +14,18 @@
             {% set flag = true %}
             {% for produit in produits %}
                 {% if flag == true %}
-                <div class="col-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="{{ path('produit_detail',{'slug': produit.slug}) }}">{{ produit.Titre }}</a>
-                            </h5>
-                            <p class="card-text">{{ produit.Description }}</p>
-                            <p class="card-text">{{ produit.Poids|number_format(1, ',', '.') }} Kgs</p>
-                            <div class="text-primary" style="font-weight: bold;font-size: 2rem">{{ produit.PriceTTC | number_format(0,'',' ')}} € TTC</div>
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{{ path('produit_detail',{'id': produit.slug}) }}">{{ produit.Titre }}</a>
+                                </h5>
+                                <p class="card-text">{{ produit.Description }}</p>
+                                <p class="card-text">{{ produit.Poids|number_format(1, ',', '.') }} Kgs</p>
+                                <div class="text-primary" style="font-weight: bold;font-size: 2rem">{{ produit.PriceTTC | number_format(0,'',' ')}} € TTC</div>
+                            </div>
                         </div>
                     </div>
-                </div>
                 {% endif %}
             {% endfor %}
         </div>
@@ -36,4 +36,3 @@
         </div>
     {% endblock %}
 {% endblock %}
-
