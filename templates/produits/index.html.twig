@@ -16,6 +16,9 @@
                 {% if flag == true %}
                 <div class="col-3">
                     <div class="card">
+                        {% if produit.imagePath is defined and produit.imagePath is not null %}
+                            <img src="{{ asset('uploads/image/'~produit.imagePath)|imagine_filter('carre') }}" />
+                        {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">
                                 <a href="{{ path('produit_detail',{'slug': produit.slug}) }}">{{ produit.Titre }}</a>

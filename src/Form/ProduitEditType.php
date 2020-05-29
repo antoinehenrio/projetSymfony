@@ -7,8 +7,10 @@ use App\Entity\Produits;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class ProduitEditType extends AbstractType
 {
@@ -30,6 +32,21 @@ class ProduitEditType extends AbstractType
             ->add('Marque', EntityType::class,[
                 'choice_label' => 'Nom',
                 'class' => Marques::class
+            ])
+            ->add('imagePath', FileType::class, [
+                'label' => 'Image du produit',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '100000k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png'
+                        ],
+                        'mimeTypesMessage' => 'Veuillez entrer un format d\'image en .jpg/.jpeg ou .png'
+                    ])
+                ]
             ])
         ;
     }
