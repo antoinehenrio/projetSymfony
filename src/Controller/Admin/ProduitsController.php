@@ -6,12 +6,13 @@ use App\Entity\Produits;
 use App\Form\ProduitEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProduitsController extends AbstractController
 {
     /**
-     * @Route("/admin/produits", name="admin_produits")
+     * @Route("/admin/produits", name="produits_index")
      */
     public function index()
     {
@@ -30,10 +31,10 @@ class ProduitsController extends AbstractController
         ]);
     }
 
-    /**
+ /*   /**
      * @Route  ("/admin/produit/add", name="admin.produit.add")
      */
-    public function add(Request $request){
+    /*public function add(Request $request){
         $produit = new Produits();
         $form = $this->createForm(ProduitEditType::class,$produit);
         $form->handleRequest($request);
@@ -48,13 +49,36 @@ class ProduitsController extends AbstractController
         return $this->render('admin/produits/add.html.twig',[
             'form' => $form->createView()
         ]);
+    }*/
+
+    /**
+     * @Route("/admin/produits/new", name="produits_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
+    {
+        $produit = new Produits();
+        $form = $this->createForm(ProduitEditType::class, $produit);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($produit);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('produits_index');
+        }
+
+        return $this->render('admin/produits/new.html.twig', [
+            'produit' => $produit,
+            'form' => $form->createView()
+        ]);
     }
 
     /**
-     * @Route("/admin/produits/{id}", name="admin.produit.edit")
+     * @Route("/admin/produits/edit/{id}", name="produits_edit")
      */
-    public function edit(Produits $produits, Request $request){
-        $form = $this->createForm(ProduitEditType::class,$produits);
+    public function edit(Produits $produit, Request $request){
+        $form = $this->createForm(ProduitEditType::class,$produit);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
@@ -68,9 +92,26 @@ class ProduitsController extends AbstractController
     }
 
     /**
-     * @Route("/admin/produit/delete/{id}", name="admin.produit.delete", methods="DELETE")
+     * @Route("/admin/produits/{id}", name="produits_show", methods={"GET"})
      */
-    public function delete(Produits $produit,Request $request){
-        return $this->redirectToRoute('admin_produits');
+    public function show(Produits $produit): Response
+    {
+        return $this->render('admin/produits/show.html.twig', [
+            'produit' => $produit,
+        ]);
+    }
+
+    /**
+     * @Route("/admin/produits/delete/{id}", name="produits_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Produits $produit): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($produit);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('produits_index');
     }
 }
