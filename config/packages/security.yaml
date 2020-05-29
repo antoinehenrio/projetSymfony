@@ -25,8 +25,11 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/admin/produits, roles: ROLE_PRODUIT }
+        - { path: ^/admin/produits, roles: ROLE_ADMIN }
         - { path: ^/admin/marques, roles: ROLE_MARQUE }
+        - { path: ^/admin/marques/new, roles: ROLE_MARQUE }
+        - { path: ^/admin/marques/edit, roles: ROLE_MARQUE }
+        - { path: ^/admin/delete, roles: ROLE_MARQUE }
 
 
     encoders:

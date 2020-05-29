@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Entity\Produits;
+use Knp\Component\Pager\PaginatorInterface;
 use App\Form\ContactType;
 use App\Service\MailTestService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,16 +16,20 @@ class ProduitsController extends AbstractController
     /**
      * @Route("/produits", name="produits")
      */
-    public function index()
+    public function index(PaginatorInterface $paginator,Request $request)
     {
+        $request = Request::createFromGlobals();
         $produitRepository = $this->getDoctrine()->getRepository(Produits::class);
         $produits = $produitRepository->findBy(['Actif'=>true]);
+        $produits = $paginator->paginate($produits,$request->query->getInt('page',1),20);
 
         return $this->render('produits/index.html.twig', [
             'produits' => $produits,
             'toto' => 'Coucou'
         ]);
     }
+
+
 
     /**
      * @Route("/produits/add", name="produits_add")

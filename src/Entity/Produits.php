@@ -73,6 +73,16 @@ class Produits
      */
     private $Marque;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $marque_id;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $ImagePath;
+
     public function __construct()
     {
         $this->Actif = false;
@@ -210,4 +220,35 @@ class Produits
 
         return $this;
     }
+
+    public function getMarqueId(): ?int
+    {
+        return $this->marque_id;
+    }
+
+    public function setMarqueId(int $marque_id): self
+    {
+        $this->marque_id = $marque_id;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImagePath()
+    {
+        return $this->ImagePath;
+    }
+
+    /**
+     * @param mixed $ImagePath
+     * @return Produits
+     */
+    public function setImagePath($ImagePath)
+    {
+        $this->ImagePath = $ImagePath;
+        return $this;
+    }
+
 }
